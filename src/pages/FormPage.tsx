@@ -2,7 +2,7 @@ import { FormEvent } from "react";
 import { postUser } from "../services/postUser";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import { User } from "../types/User";
 import { Button, Col, Flex, Input, Row, Select, Space, Typography } from "antd";
 import { Link } from "react-router-dom";
@@ -10,7 +10,14 @@ import { RollbackOutlined } from "@ant-design/icons";
 
 function FormPage() {
   const queryClient = useQueryClient();
-  const { reset, handleSubmit, register, getValues, control } = useForm<User>();
+  const { reset, handleSubmit, register, control } = useForm<User>({
+    defaultValues: {
+      name: "",
+      surname: "",
+      email: "",
+      skills: [],
+    },
+  });
   const { mutate, isPending } = useMutation({
     mutationFn: postUser,
     onSuccess: () => {
@@ -23,6 +30,7 @@ function FormPage() {
     },
   });
   function onSubmit(data: User) {
+    console.log(data);
     mutate(data);
   }
   return (
@@ -37,31 +45,31 @@ function FormPage() {
           Добавить пользователя
         </Typography.Title>
         <Row gutter={16}>
-          <Col className="gutter-row" span={6}>
-            <Input
-              required
-              type="text"
-              placeholder="Имя"
-              id="name"
-              {...register("name")}
+          <Col span={6}>
+            <Controller
+              name="name"
+              control={control}
+              render={({ field }) => (
+                <Input required type="text" placeholder="Имя" {...field} />
+              )}
             />
           </Col>
-          <Col className="gutter-row" span={6}>
-            <Input
-              required
-              type="text"
-              placeholder="Фамилия"
-              id="surname"
-              {...register("surname")}
+          <Col span={6}>
+            <Controller
+              name="surname"
+              control={control}
+              render={({ field }) => (
+                <Input required type="text" placeholder="Фамилия" {...field} />
+              )}
             />
           </Col>
-          <Col className="gutter-row" span={6}>
-            <Input
-              required
-              type="email"
-              placeholder="Email"
-              id="email"
-              {...register("email")}
+          <Col span={6}>
+            <Controller
+              name="email"
+              control={control}
+              render={({ field }) => (
+                <Input required type="email" placeholder="Email" {...field} />
+              )}
             />
           </Col>
           <Col className="gutter-row" span={6}>
