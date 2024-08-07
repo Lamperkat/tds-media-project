@@ -5,7 +5,7 @@ async function getUsersByQuery(query: string) {
   const { data: users, error } = await supabase
     .from("user")
     .select()
-    .ilike("name", `%${query}%`); // Partial match for `name`
+    .ilike("name", `%${query}%`);
 
   if (error) {
     throw new Error(error.message);

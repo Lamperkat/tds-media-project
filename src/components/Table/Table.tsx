@@ -40,18 +40,17 @@ function Table() {
     },
   ];
 
-  const { data: usersData = [], isLoading: isLoadingUsers } = useQuery({
+  const { data: usersData = [] } = useQuery({
     queryKey: ["user"],
     queryFn: getUsers,
   });
 
-  const { data: queryData = [], isLoading: isLoadingQuery } = useQuery({
+  const { data: queryData = [] } = useQuery({
     queryKey: ["user", query],
     queryFn: () => getUsersByQuery(query),
-    enabled: !!query, // Only run this query if `query` is not empty
+    enabled: !!query,
   });
 
-  // Combine the data as needed
   const data = query ? queryData : usersData;
   const tableInstance = useReactTable({
     manualPagination: true,
@@ -60,8 +59,7 @@ function Table() {
 
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(), //order doesn't matter anymore!
-    // etc.
+    getSortedRowModel: getSortedRowModel(),
   });
   return (
     <table style={{ overflowY: "scroll" }}>

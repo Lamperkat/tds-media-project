@@ -1,4 +1,4 @@
-import { Button, Flex, Input, Layout } from "antd";
+import { Button, Flex, Input } from "antd";
 import "./App.css";
 import Table from "./components/Table/Table";
 import { useNavigate } from "react-router-dom";
@@ -8,9 +8,7 @@ function App() {
   const { query, setQuery } = useUserStore();
   const nav = useNavigate();
   const handlePageChange = () => {
-    // Start the animation and then navigate to the new page
-
-    nav("/add-user"); // Change to your target route
+    nav("/add-user");
   };
 
   return (
@@ -32,7 +30,6 @@ function App() {
       </Flex>
       <Table />
     </Flex>
-    // </motion.div>
   );
 }
 

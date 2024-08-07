@@ -1,16 +1,15 @@
-import { FormEvent } from "react";
 import { postUser } from "../services/postUser";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { Controller, useForm, useWatch } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { User } from "../types/User";
-import { Button, Col, Flex, Input, Row, Select, Space, Typography } from "antd";
+import { Button, Col, Flex, Input, Row, Select, Typography } from "antd";
 import { Link } from "react-router-dom";
 import { RollbackOutlined } from "@ant-design/icons";
 
 function FormPage() {
   const queryClient = useQueryClient();
-  const { reset, handleSubmit, register, control } = useForm<User>({
+  const { reset, handleSubmit, control } = useForm<User>({
     defaultValues: {
       name: "",
       surname: "",

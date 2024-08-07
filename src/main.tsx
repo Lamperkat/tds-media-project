@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { ConfigProvider, Switch } from "antd";
+import { ConfigProvider } from "antd";
 import {
   BrowserRouter,
   Route,
-  Router,
   Routes,
   useLocation,
   useNavigate,
